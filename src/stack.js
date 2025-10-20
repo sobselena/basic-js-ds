@@ -1,3 +1,4 @@
+const { ListNode } = require('../extensions/list-node');
 const { NotImplementedError } = require('../lib/errors');
 
 /**
@@ -13,19 +14,40 @@ const { NotImplementedError } = require('../lib/errors');
  *
  */
 class Stack {
-  push(/* value */) {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+
+  push(value) {
+    let curNode = this.head;
+    const createdNode = new ListNode(value);
+    if (!this.head) {
+      this.head = createdNode;
+      this.tail = createdNode;
+    } else {
+      createdNode.next = this.head;
+      this.head = createdNode;
+    }
+
+    this.length++;
+    return this;
   }
 
   pop() {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+    if (!this.head) return undefined;
+    if (this.length === 1) {
+      this.tail = null;
+    }
+    const removedNode = this.head.value;
+    this.head = this.head.next;
+    this.length--;
+    return removedNode;
   }
 
   peek() {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+    return this.head?.value;
   }
 }
 
